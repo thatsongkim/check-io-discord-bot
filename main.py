@@ -9,6 +9,11 @@ prefix = "/"
 bot = commands.Bot(command_prefix=prefix, intents=discord.Intents.all())
 
 
+@bot.command(name="ping")
+async def ping(ctx):
+    await ctx.send("pong")
+
+
 @bot.command(name="set")
 async def set_channel(ctx, flag, channel_name):
     guild_id = ctx.guild.id

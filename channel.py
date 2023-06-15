@@ -1,8 +1,8 @@
 import pymongo
+import config
 
-host = "localhost"
-port = 27017
-client = pymongo.MongoClient(host, port)
+db_uri = config.get("DB_URI")
+client = pymongo.MongoClient(db_uri)
 
 
 def set_voice_channel(guild_id: int, voice_channel_id: int):
