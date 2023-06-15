@@ -56,9 +56,9 @@ async def on_voice_state_update(member, before, after):
     before_channel_id = before.channel.__getattribute__("id") if before.channel else None
     after_channel_id = after.channel.__getattribute__("id") if after.channel else None
     if before.channel is None and after_channel_id == voice_channel_id:
-        await message_channel.send(check_in_out_message(True, member))
+        await message_channel.send(check_in_out_message(True, member.display_name))
     elif before_channel_id == voice_channel_id and after.channel is None:
-        await message_channel.send(check_in_out_message(False, member))
+        await message_channel.send(check_in_out_message(False, member.display_name))
 
 
 bot.run(config.get("TOKEN"))
