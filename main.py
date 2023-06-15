@@ -9,9 +9,10 @@ prefix = "/"
 bot = commands.Bot(command_prefix=prefix, intents=discord.Intents.all())
 
 
-@bot.command(name="ping")
-async def ping(ctx):
-    await ctx.send("pong")
+@bot.command(name="commands")
+async def commands(ctx):
+    await ctx.send(f"**{prefix}set -v <voice_channel_name>**: set voice channel\n"
+                   f"**{prefix}set -m <message_channel_name>**: set message channel")
 
 
 @bot.command(name="set")
