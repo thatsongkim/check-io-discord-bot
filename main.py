@@ -12,7 +12,10 @@ bot = commands.Bot(command_prefix=prefix, intents=discord.Intents.all())
 @bot.command(name="commands")
 async def commands(ctx):
     await ctx.send(f"**{prefix}set -v <voice_channel_name>**: set voice channel\n"
-                   f"**{prefix}set -m <message_channel_name>**: set message channel")
+                   f"**{prefix}set -m <message_channel_name>**: set message channel\n"
+                   f"**{prefix}clear -v**: clear voice channel\n"
+                   f"**{prefix}clear -m**: clear message channel\n"
+                   f"**{prefix}clear -all**: clear all channels")
 
 
 @bot.command(name="set")
@@ -34,6 +37,21 @@ async def set_channel(ctx, flag, channel_name):
             await ctx.send(f"Message channel set to {channel_name}")
         else:
             await ctx.send(f"Channel {channel_name} not found")
+
+
+@bot.command(name="clear")
+async def clear(ctx, flag):
+    guild_id = ctx.guild.id
+    if flag == "-v":
+        set_voice_channel(guild_id, 0)
+        await ctx.send("Voice channel cleared")
+    elif flag == "-m":
+        set_message_channel(guild_id, 0)
+        await ctx.send("Message channel cleared")
+    elif flag == "-all":
+        set_voice_channel(guild_id, 0)
+        set_message_channel(guild_id, 0)
+        await ctx.send("All channels cleared")
 
 
 def time_string():
